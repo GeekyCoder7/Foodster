@@ -3,16 +3,24 @@
 ### Upcoming version: v0.2-alpha
 
 # To-do List:
-## Admin & User
+## Code:
+### Admin & User
 - Login/signup with Firebase
 - Notifications with FCM
 
-## Admin
+### Admin
 - Admin panel to add/remove item/recipe
 
-## User
+### User
 - Add recipe instruction with layout [Follow instructions]
-- Check selected cuisine from google maps
+- Add favorite cuisine
+- Add favorite recipe
+- Share recipe
+- Share app
+
+## Design:
+- Edit page for admin
+
 
 
 # Changelog:
@@ -21,4 +29,5 @@
 - Cuisine layout added
 - Recipe layout added
 - Google maps integration to see nearest market
-
+- Login / signup layouts added
+- Check selected cuisine from google maps

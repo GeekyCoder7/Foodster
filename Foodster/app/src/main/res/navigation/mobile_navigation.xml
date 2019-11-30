@@ -7,37 +7,23 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.nkt.yummyrecipe.ui.home.HomeFragment"
+        android:name="com.nkt.foodster.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.nkt.yummyrecipe.ui.gallery.GalleryFragment"
-        android:label="@string/menu_login"
+        android:id="@+id/nav_favorite_cuisines"
+        android:name="com.nkt.foodster.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.nkt.yummyrecipe.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_favorite_recipes"
+        android:name="com.nkt.foodster.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.nkt.yummyrecipe.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
 
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.nkt.yummyrecipe.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
 
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.nkt.yummyrecipe.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>

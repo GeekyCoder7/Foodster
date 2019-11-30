@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "480760948866",
+    "firebase_url": "https://foodster-6bb02.firebaseio.com",
+    "project_id": "foodster-6bb02",
+    "storage_bucket": "foodster-6bb02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480760948866:android:018ffe3a461bf27757ac9b",
+        "android_client_info": {
+          "package_name": "com.nkt.foodster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480760948866-5i5jshbgi4prqei46p4644ao8vl09ljb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nkt.foodster",
+            "certificate_hash": "9b5872ca1df95ad02ebcbbcb30f3837fa556afde"
+          }
+        },
+        {
+          "client_id": "480760948866-mu1d99jq2a6olhh822utj7q46h9t5bds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8y5w3llgBCrqHMwxKezIUzRs03Ectm8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480760948866-mu1d99jq2a6olhh822utj7q46h9t5bds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

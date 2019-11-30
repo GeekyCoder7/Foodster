@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bgapps2"
     android:orientation="vertical"
-    tools:context=".RecipesActivity"
+    tools:context="com.nkt.foodster.RecipesActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout

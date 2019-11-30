@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Yummy Recipe</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="app_name">Foodster</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Settings</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="menu_gallery">Gallery</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_cuisines">Cuisines</string>
@@ -14,8 +14,7 @@
     <string name="menu_login">Login</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_share">Share app</string>
     <string name="menu_fav_recipes">Favorite recipes</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -29,4 +28,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_signup">Sign up</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="logout">Logout</string>
+    <string name="communicate">Communicate</string>
+    <string name="foodster_login">Foodster Login</string>
 </resources>

@@ -1,12 +1,12 @@
-# Foodster v0.1-alpha
+# Foodster v0.2-alpha
 ## Foodster is a recipe mobile application, having different cuisines.
-### Upcoming version: v0.2-alpha
+### Upcoming version: v0.3-alpha
 
 # To-do List:
 ## Code:
 ### Admin & User
-- Login/signup with Firebase
 - Notifications with FCM
+- Add categories/recipes in firebase
 
 ### Admin
 - Admin panel to add/remove item/recipe
@@ -15,12 +15,9 @@
 - Add recipe instruction with layout [Follow instructions]
 - Add favorite cuisine
 - Add favorite recipe
-- Share recipe
-- Share app
 
 ## Design:
 - Edit page for admin
-
 
 
 # Changelog:
@@ -31,3 +28,9 @@
 - Google maps integration to see nearest market
 - Login / signup layouts added
 - Check selected cuisine from google maps
+
+
+## v0.2-alpha
+- Login/signup with Firebase
+- Share app
+- Share recipe

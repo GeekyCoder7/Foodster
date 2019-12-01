@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     static final int GOOGLE_SIGN = 123;
     static FirebaseAuth mAuth;
     Button btn_login, btn_logout;
-    TextView text;
+    TextView text,text1;
     ImageView image;
     ProgressBar progressBar;
     static GoogleSignInClient mGoogleSignInClient;
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.login);
         btn_logout = findViewById(R.id.logout);
         text = findViewById(R.id.text);
+        text1 = findViewById(R.id.text1);
         image = findViewById(R.id.image);
         progressBar = findViewById(R.id.progress_circular);
 
@@ -65,6 +66,11 @@ public class LoginActivity extends AppCompatActivity {
             FirebaseUser user = mAuth.getCurrentUser();
             updateUI(user);
         }
+        text1.setOnClickListener(v->{
+            Intent intent = new Intent(this, AdminLoginActivity.class);
+            startActivity(intent);
+        });
+
 
     }
 
@@ -131,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             btn_logout.setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+            intent.putExtra("isAdmin",0);
             startActivity(intent);
         }
         else{

@@ -9,68 +9,121 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+import static com.nkt.foodster.MainActivity.MyPREFERENCES;
 
 public class RecipesActivity extends AppCompatActivity {
     String cuisine_type="";
+    SharedPreferences sharedpreferences;
+    private boolean isAdmin = false;
+    private RecyclerView mRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
-        Button mapButton = (Button) findViewById(R.id.mapButton);
+//        Button mapButton = (Button) findViewById(R.id.mapButton);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             cuisine_type = extras.getString("cuisine_type");
-            TextView textView = (TextView) findViewById(R.id.txtDashboard);
-            textView.setText(cuisine_type+" cuisine");
+//            TextView textView = (TextView) findViewById(R.id.txtDashboard);
+//            textView.setText(cuisine_type+" cuisine");
 
 
-            mapButton.setText("Explore "+cuisine_type+" cuisines near you");
+//            mapButton.setText("Explore "+cuisine_type+" cuisines near you");
             //The key argument here must match that used in the other activity
         }
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_recipes);
 
-        CardView burgerCV = (CardView) findViewById(R.id.hamburger);
-        burgerCV.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = findViewById(R.id.fab1);
+        fab.hide();
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),RecipeActivity.class);
-                intent.putExtra("item_name", "Hamburger");
-                intent.putExtra("ingredients", "1. 1 burger bun\n2. 1 beef\n3. 1 fresh tomato");
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        mapButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                String uri = "https://www.google.com/maps/search/"+cuisine_type+"+restaurants";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                Intent intent = new Intent(RecipesActivity.this, NewRecipeActivity.class);
                 startActivity(intent);
             }
         });
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if(sharedpreferences.getBoolean("is_really_admin", false)){
+            fab.show();
+        }
 
-
-        ImageView likeImageView = (ImageView) findViewById(R.id.likeImageView) ;
-        likeImageView.setOnClickListener(new View.OnClickListener(){
+        new FirebaseDatabaseHelper().readRecipes(cuisine_type,new FirebaseDatabaseHelper.DataStatus1() {
             @Override
-            public void onClick(View view){
+            public void DataIsLoaded1(List<Recipe> recipes, List<String> keys) {
+                new RecyclerView_Config().setConfig1(mRecyclerView, RecipesActivity.this, recipes, keys);
+            }
+
+            @Override
+            public void DataIsInserted1() {
+
+            }
+
+            @Override
+            public void DataIsUpdated1() {
+
+            }
+
+            @Override
+            public void DataIsDeleted1() {
+
+            }
+        });
+//        CardView burgerCV = (CardView) findViewById(R.id.hamburger);
+//        burgerCV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(),RecipeActivity.class);
+//                intent.putExtra("item_name", "Hamburger");
+//                intent.putExtra("ingredients", "1. 1 burger bun\n2. 1 beef\n3. 1 fresh tomato");
+//                view.getContext().startActivity(intent);
+//            }
+//        });
+
+//        mapButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
 //                String uri = "https://www.google.com/maps/search/"+cuisine_type+"+restaurants";
 //                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 //                startActivity(intent);
-            }
-        });
+//            }
+//        });
+
+
+//        ImageView likeImageView = (ImageView) findViewById(R.id.likeImageView) ;
+//        likeImageView.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+////                String uri = "https://www.google.com/maps/search/"+cuisine_type+"+restaurants";
+////                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+////                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -78,9 +131,56 @@ public class RecipesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        if(!isAdmin&&!sharedpreferences.getBoolean("is_really_admin", false)){
+            menu.removeItem(R.id.switchId);
+        }
+        else{
+
+            MenuItem item = (MenuItem) menu.findItem(R.id.switchId);
+
+            item.setActionView(R.layout.switch_item);
+            Switch switchAB = item.getActionView().findViewById(R.id.switchAB);
+            if(isAdmin){
+                switchAB.setChecked(true);
+            }
+
+
+
+            switchAB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView,
+                                             boolean isChecked) {
+
+                    if (isChecked) {
+                        isAdmin= true;
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putBoolean("isAdmin", true);
+                        editor.putBoolean("is_really_admin", true);
+                        Log.d("key","Hellooo3"+ sharedpreferences.getBoolean("isAdmin", false));
+                        editor.apply();
+                        Toast.makeText(getApplication(), "Admin mode: ON", Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        isAdmin=false;
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.remove("isAdmin");
+                        editor.putBoolean("is_really_admin", true);
+                        editor.apply();
+
+                        Log.d("key","Hellooo3"+ sharedpreferences.getBoolean("isAdmin", false));
+                        Toast.makeText(getApplication(), "Admin mode: OFF", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            });
+
+        }
+
+        return true;
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

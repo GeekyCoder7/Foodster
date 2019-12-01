@@ -6,10 +6,10 @@
 ## Code:
 ### Admin & User
 - Notifications with FCM
-- Add categories/recipes in firebase
+
 
 ### Admin
-- Admin panel to add/remove item/recipe
+- Admin panel to add item/recipe
 
 ### User
 - Add recipe instruction with layout [Follow instructions]
@@ -34,3 +34,6 @@
 - Login/signup with Firebase
 - Share app
 - Share recipe
+- Firebase database added
+- Admin panel to remove/update 
+- Add categories/recipes in firebase

@@ -1,98 +1,57 @@
 package com.nkt.foodster.ui.home;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.nkt.foodster.MainActivity;
+import com.nkt.foodster.Cuisine;
+import com.nkt.foodster.FirebaseDatabaseHelper;
 import com.nkt.foodster.R;
-import com.nkt.foodster.RecipesActivity;
+import com.nkt.foodster.RecyclerView_Config;
 
-import static android.content.Context.MODE_PRIVATE;
+import java.util.List;
+
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-
+    private RecyclerView mRecyclerView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        homeViewModel =
-//                ViewModelProviders.of(this).get(HomeViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerview_cuisines);
 
-
-
-
-        CardView americanCV = (CardView) root.findViewById(R.id.americanCard);
-        americanCV.setOnClickListener(new View.OnClickListener() {
+        new FirebaseDatabaseHelper().readCuisines(new FirebaseDatabaseHelper.DataStatus() {
             @Override
-            public void onClick(View view) {
-//                SharedPreferences.Editor preferenceEditor=mPreferences.edit();
-//                preferenceEditor.putString("ID","201701143");
-//                preferenceEditor.apply();
-                Intent intent = new Intent(view.getContext(), RecipesActivity.class);
-                intent.putExtra("cuisine_type", "American");
-                view.getContext().startActivity(intent);
+            public void DataIsLoaded(List<Cuisine> cuisines, List<String> keys) {
+                new RecyclerView_Config().setConfig(mRecyclerView, getActivity(), cuisines, keys);
             }
-        });
 
-        CardView italianCV = (CardView) root.findViewById(R.id.italianCard);
-        italianCV.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("Connect to Provider")
-                        .setMessage("Hello Alert!")
-                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog,int which){
-                                //cancel
-                            }
-                        })
-                        .setPositiveButton("OK",new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog,int which){
-                                //OK
-                            }
-                        });
+            @Override
+            public void DataIsInserted() {
 
-                alertDialog.show();
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
 
             }
         });
 
 
-        CardView armenianCV = (CardView) root.findViewById(R.id.armenianCard);
-        armenianCV.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view){
-                Uri uri = Uri.parse("tel:71531019");
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intent);
-
-            }
-        });
 
         return root;
     }

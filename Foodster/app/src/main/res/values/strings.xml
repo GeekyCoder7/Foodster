@@ -32,4 +32,13 @@
     <string name="logout">Logout</string>
     <string name="communicate">Communicate</string>
     <string name="foodster_login">Foodster Login</string>
+    <string name="sign_in_as_admin">Sign in as admin</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="add_cuisine">Cuisine, Ex: American</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="admin_toggle">Admin Toggle</string>
 </resources>

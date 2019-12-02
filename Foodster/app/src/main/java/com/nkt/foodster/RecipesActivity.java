@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.nkt.foodster.MainActivity.MyPREFERENCES;
 
@@ -40,6 +41,7 @@ public class RecipesActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     private boolean isAdmin = false;
     private RecyclerView mRecyclerView;
+    private String key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class RecipesActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             cuisine_type = extras.getString("cuisine_type");
+            key = extras.getString("key");
+            System.out.println("Parent key is: "+key);
 //            TextView textView = (TextView) findViewById(R.id.txtDashboard);
 //            textView.setText(cuisine_type+" cuisine");
 
@@ -57,7 +61,6 @@ public class RecipesActivity extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_recipes);
-
         FloatingActionButton fab = findViewById(R.id.fab1);
         fab.hide();
 
@@ -65,17 +68,25 @@ public class RecipesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RecipesActivity.this, NewRecipeActivity.class);
+                intent.putExtra("key",key);
                 startActivity(intent);
             }
         });
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("parentKey",key);
+        editor.apply();
+        System.out.println("Parent key is: "+sharedpreferences.getString("parentKey",""));
         if(sharedpreferences.getBoolean("is_really_admin", false)){
             fab.show();
         }
 
-        new FirebaseDatabaseHelper().readRecipes(cuisine_type,new FirebaseDatabaseHelper.DataStatus1() {
+       new FirebaseDatabaseHelper().readRecipes(cuisine_type,new FirebaseDatabaseHelper.DataStatus1() {
             @Override
             public void DataIsLoaded1(List<Recipe> recipes, List<String> keys) {
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putInt("recipe_size",recipes.size());
+                editor.apply();
                 new RecyclerView_Config().setConfig1(mRecyclerView, RecipesActivity.this, recipes, keys);
             }
 
@@ -94,36 +105,6 @@ public class RecipesActivity extends AppCompatActivity {
 
             }
         });
-//        CardView burgerCV = (CardView) findViewById(R.id.hamburger);
-//        burgerCV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(),RecipeActivity.class);
-//                intent.putExtra("item_name", "Hamburger");
-//                intent.putExtra("ingredients", "1. 1 burger bun\n2. 1 beef\n3. 1 fresh tomato");
-//                view.getContext().startActivity(intent);
-//            }
-//        });
-
-//        mapButton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                String uri = "https://www.google.com/maps/search/"+cuisine_type+"+restaurants";
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-//                startActivity(intent);
-//            }
-//        });
-
-
-//        ImageView likeImageView = (ImageView) findViewById(R.id.likeImageView) ;
-//        likeImageView.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-////                String uri = "https://www.google.com/maps/search/"+cuisine_type+"+restaurants";
-////                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-////                startActivity(intent);
-//            }
-//        });
 
     }
 

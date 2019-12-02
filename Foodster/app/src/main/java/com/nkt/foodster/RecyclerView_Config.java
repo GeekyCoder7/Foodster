@@ -40,7 +40,7 @@ public class RecyclerView_Config {
     }
 
     class CuisineItemView extends RecyclerView.ViewHolder {
-        private TextView mTitle;
+        private TextView mTitle, mimageURL;
         private ImageView mImage;
 
         private String key;
@@ -50,7 +50,10 @@ public class RecyclerView_Config {
                     inflate(R.layout.cuisine_list_item, parent, false));
 
             mTitle = (TextView) itemView.findViewById(R.id.title_txtView);
-            mImage = (ImageView) itemView.findViewById(R.id.cuisineImgView);
+            mimageURL = (TextView) itemView.findViewById(R.id.cuisineImageURLtxtView);
+
+           mImage = (ImageView) itemView.findViewById(R.id.cuisineImgView);
+
             sharedpreferences = mContext.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
                 itemView.setOnClickListener(v->{
@@ -59,11 +62,13 @@ public class RecyclerView_Config {
                         Intent intent = new Intent(mContext, CuisineDetailsActivity.class);
                         intent.putExtra("key",key);
                         intent.putExtra("cuisine_type",mTitle.getText());
-                        intent.putExtra("cuisine_type",mTitle.getText());
+                        intent.putExtra("image_URL",mimageURL.getText());
                         mContext.startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(mContext, RecipesActivity.class);
+                        intent.putExtra("key",key);
+                        System.out.println("Parev"+key);
                         intent.putExtra("cuisine_type", mTitle.getText().toString());
                         mContext.startActivity(intent);
                     }
@@ -80,6 +85,7 @@ public class RecyclerView_Config {
 
         public void bind(Cuisine cuisine, String key){
             mTitle.setText(cuisine.getTitle());
+            mimageURL.setText(cuisine.getImageURL());
             if(cuisine.getImageURL()!=null&&cuisine.getImageURL().length()==0){
                 switch (cuisine.getTitle()){
                     case "American":
@@ -118,7 +124,7 @@ public class RecyclerView_Config {
     }
 
     class RecipeItemView extends RecyclerView.ViewHolder {
-        private TextView mTitle, mCalories, mIngredients;
+        private TextView mId,mTitle, mCalories, mIngredients,mInstructions,mImageURL;
         private ImageView mImage;
 
         private String key;
@@ -127,9 +133,13 @@ public class RecyclerView_Config {
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.recipe_list_item, parent, false));
 
+            mId = (TextView) itemView.findViewById(R.id.id_txtView);
             mTitle = (TextView) itemView.findViewById(R.id.title_txtView);
             mCalories = (TextView) itemView.findViewById(R.id.caloriesTxtView);
             mIngredients = (TextView) itemView.findViewById(R.id.ingredientsTxtView);
+            mInstructions = (TextView) itemView.findViewById(R.id.instructionsTxtView);
+
+            mImageURL = (TextView) itemView.findViewById(R.id.recipeImageURLTxtView);
             mImage = (ImageView) itemView.findViewById(R.id.recipeImgView);
             sharedpreferences = mContext.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
@@ -139,8 +149,14 @@ public class RecyclerView_Config {
                 if(isAdmin){
 
                     Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
+                    intent.putExtra("id",mId.getText());
                     intent.putExtra("key",key);
+                    System.out.println("parev"+key);
                     intent.putExtra("title",mTitle.getText());
+                    intent.putExtra("ingredients",mIngredients.getText());
+                    intent.putExtra("calories",mCalories.getText());
+                    intent.putExtra("instructions",mInstructions.getText());
+                    intent.putExtra("imageURL",mImageURL.getText());
                     mContext.startActivity(intent);
 
                 }
@@ -161,10 +177,14 @@ public class RecyclerView_Config {
 
 
         public void bind(Recipe recipe, String key){
+            System.out.println(recipe);
+            mId.setText(key);
             mTitle.setText(recipe.getTitle());
-            mCalories.setText(recipe.getCalories()+" Calories");
+            mCalories.setText(recipe.getCalories());
             mIngredients.setText(recipe.getIngredients());
-
+            mImageURL.setText(recipe.getImageURL());
+            mInstructions.setText(recipe.getInstructions());
+//            Log.d("asd","Hel2"+recipe.getId());
             this.key=key;
         }
 
@@ -207,7 +227,7 @@ public class RecyclerView_Config {
 
         public RecipeAdapter(List<Recipe> mRecipeList, List<String> mKeys) {
             this.mRecipeList = mRecipeList;
-            this.mKeys = mKeys;
+            this.mKeys=mKeys;
         }
 
         public Recipe getRecipe(int position) {

@@ -41,4 +41,10 @@
     <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="admin_toggle">Admin Toggle</string>
+    <string name="enter_image_url">Enter image URL</string>
+    <string name="recipe_ex_hamburger">Recipe, ex: Hamburger</string>
+    <string name="calories_ex_200">Calories, ex: 200</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="calories">Calories</string>
 </resources>

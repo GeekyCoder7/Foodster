@@ -56,12 +56,56 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
-                android:layout_marginTop="52dp"
-                android:visibility="invisible"
+                android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
                 android:textColor="#6f6f6f"
                 android:textSize="18sp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/recipeImgView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/id_txtView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="textEnd"
+                android:textColor="#6f6f6f"
+                android:visibility="invisible"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/recipeImgView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/instructionsTxtView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="32dp"
+                android:textAlignment="textEnd"
+                android:textColor="#6f6f6f"
+                android:textSize="18sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/recipeImgView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recipeImageURLTxtView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:textAlignment="textEnd"
+                android:textColor="#6f6f6f"
+                android:textSize="18sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/recipeImgView"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,11 +115,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="52dp"
-                android:layout_marginEnd="16dp"
+                android:text="asd"
+                android:textAlignment="textEnd"
+                android:textColor="#6f6f6f"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/caloriesTxtView1"
+                app:layout_constraintHorizontal_bias="0.88"
+                app:layout_constraintStart_toEndOf="@+id/recipeImgView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/caloriesTxtView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="52dp"
+                android:text="@string/calories"
                 android:textAlignment="textEnd"
                 android:textColor="#6f6f6f"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.73"
                 app:layout_constraintStart_toEndOf="@+id/recipeImgView"
                 app:layout_constraintTop_toTopOf="parent" />
 

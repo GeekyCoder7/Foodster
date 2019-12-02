@@ -12,11 +12,11 @@ import java.util.List;
 
 public class CuisineDetailsActivity extends AppCompatActivity {
 
-    private EditText cuisine_type;
+    private EditText cuisine_type, image_url;
     private Button update_btn, delete_btn;
 
-    private String key;
-    private String title;
+    private String key, index;
+    private String title, image_url_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +24,23 @@ public class CuisineDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cuisine_details);
 
         key = getIntent().getStringExtra("key");
+        key = getIntent().getStringExtra("key");
         title = getIntent().getStringExtra("cuisine_type");
-        System.out.println("Helloo"+title);
+        image_url_txt = getIntent().getStringExtra("image_URL");
+
+        System.out.println("Helloo"+image_url_txt);
 
         cuisine_type = (EditText) findViewById(R.id.cuisineTitle_editText);
+        image_url = (EditText) findViewById(R.id.cuisineImageURL_editText);
         cuisine_type.setText(title);
+        image_url.setText(image_url_txt);
         update_btn = (Button) findViewById(R.id.updateButton);
         delete_btn = (Button) findViewById(R.id.deleteButton);
 
         update_btn.setOnClickListener(v->{
 //            Cuisine cuisine = new Cuisine();
 //            cuisine.setTitle(cuisine_type.getText().toString());
-            new FirebaseDatabaseHelper().updateCuisineTitle(key, cuisine_type.getText().toString(), new FirebaseDatabaseHelper.DataStatus() {
+            new FirebaseDatabaseHelper().updateCuisine(key,cuisine_type.getText().toString(), image_url.getText().toString(),new FirebaseDatabaseHelper.DataStatus() {
                 @Override
                 public void DataIsLoaded(List<Cuisine> cuisines, List<String> keys) {
 
@@ -90,14 +95,14 @@ public class CuisineDetailsActivity extends AppCompatActivity {
     }
 
     private int getIndex_SpinnerItem(Spinner spinner, String item){
-            int index = 0;
-            for(int i = 0; i < spinner.getCount(); i++){
-                if(spinner.getItemAtPosition(i).equals(item)){
-                    index = i;
-                    break;
-                }
+        int index = 0;
+        for(int i = 0; i < spinner.getCount(); i++){
+            if(spinner.getItemAtPosition(i).equals(item)){
+                index = i;
+                break;
             }
-            return index;
+        }
+        return index;
     }
 
 }

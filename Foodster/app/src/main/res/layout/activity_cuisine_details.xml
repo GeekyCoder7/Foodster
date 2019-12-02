@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
-    tools:context=".NewCuisineActivity">
+    tools:context=".CuisineDetailsActivity">
 
     <EditText
         android:id="@+id/cuisineTitle_editText"
@@ -21,29 +21,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/cuisineImageURL_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/enter_image_url"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cuisineTitle_editText" />
+
     <Button
         android:id="@+id/updateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/round_bg"
+        android:layout_marginTop="48dp"
 
+        android:background="@drawable/round_bg"
         android:text="@string/update"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cuisineTitle_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/cuisineImageURL_editText" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/round_bg"
         android:text="@string/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintHorizontal_bias="0.707"
         app:layout_constraintStart_toEndOf="@+id/updateButton"
-        app:layout_constraintTop_toBottomOf="@+id/cuisineTitle_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/cuisineImageURL_editText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,8 @@
 ## Foodster is a recipe mobile application, having different cuisines.
 ### Upcoming version: v0.4-alpha
 
+# Progress: 85/100
+
 # To-do List:
 ## Code:
 ### Admin & User

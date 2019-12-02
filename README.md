@@ -1,6 +1,6 @@
-# Foodster v0.2-alpha
+# Foodster v0.3-alpha
 ## Foodster is a recipe mobile application, having different cuisines.
-### Upcoming version: v0.3-alpha
+### Upcoming version: v0.4-alpha
 
 # To-do List:
 ## Code:
@@ -31,6 +31,8 @@
 - Login/signup with Firebase
 - Share app
 - Share recipe
+
+## v0.3-alpha
 - Firebase database added
 - Admin panel to add/remove/update cuisines/recipes
 - Add cuisines/recipes in firebase

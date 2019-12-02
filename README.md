@@ -11,7 +11,6 @@
     Done :)
 
 ### User
-- Add recipe instruction with layout [Follow instructions]
 - Add favorite cuisine
 - Add favorite recipe
 
@@ -36,3 +35,4 @@
 - Admin panel to add/remove/update cuisines/recipes
 - Add cuisines/recipes in firebase
 - Edit page for admin
+- Add recipe instruction with layout [Follow instructions]

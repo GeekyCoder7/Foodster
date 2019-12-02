@@ -55,6 +55,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/ingredients"
+        android:visibility="invisible"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
@@ -63,13 +64,18 @@
         app:layout_constraintTop_toBottomOf="@+id/recipeCalories_editText" />
 
     <EditText
-        android:id="@+id/recipeInstructions_editText"
-        android:layout_width="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:minLines="6"
+        android:gravity="top|left"
+        android:maxLines="10"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:scrollbars="vertical"
+        android:id="@+id/recipeInstructions_editText"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/instructions"
-        android:inputType="textPersonName"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,4 +121,6 @@
         app:layout_constraintHorizontal_bias="0.707"
         app:layout_constraintStart_toEndOf="@+id/updateButton"
         app:layout_constraintTop_toBottomOf="@+id/recipeImageURL_editText" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

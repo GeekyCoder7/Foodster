@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -15,7 +16,8 @@ import static com.nkt.foodster.MainActivity.MyPREFERENCES;
 
 public class NewRecipeActivity extends AppCompatActivity {
 
-    private EditText titleEditTxt, image_urlEditTxt, caloriesEditTxt, ingredientsEditTxt, instructionsEditTxt ;
+    private EditText titleEditTxt, image_urlEditTxt, caloriesEditTxt, ingredientsEditTxt;
+    private EditText instructionsEditTxt;
     private Button add_btn;
     private String parentKey, key;
     SharedPreferences sharedPreferences;

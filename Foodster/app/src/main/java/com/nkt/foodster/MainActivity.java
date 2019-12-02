@@ -42,22 +42,17 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAdmin = false;
     SharedPreferences sharedpreferences;
     NavigationView navigationView;
+    Switch switchAB;
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            isAdmin = extras.getBoolean("isAdmin");
-        }
+
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-
-        editor.putBoolean("isAdmin",isAdmin);
-        editor.apply();
+        isAdmin = sharedpreferences.getBoolean("isAdmin",false);
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -99,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(switchAB!=null){
+            switchAB.setChecked(sharedpreferences.getBoolean("isAdmin",false));
+        }
+
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem item = (MenuItem) menu.findItem(R.id.switchId);
 
             item.setActionView(R.layout.switch_item);
-            Switch switchAB = item.getActionView().findViewById(R.id.switchAB);
+            switchAB = item.getActionView().findViewById(R.id.switchAB);
             switchAB.setChecked(true);
 
             switchAB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -122,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                         isAdmin= true;
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putBoolean("isAdmin", true);
-                        editor.putBoolean("is_really_admin", true);
                         Log.d("key","Hellooo3"+ sharedpreferences.getBoolean("isAdmin", false));
                         editor.apply();
                         Toast.makeText(getApplication(), "Admin mode: ON", Toast.LENGTH_SHORT)
@@ -131,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                         isAdmin=false;
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.remove("isAdmin");
-                        editor.putBoolean("is_really_admin", true);
                         editor.apply();
 
                         Log.d("key","Hellooo3"+ sharedpreferences.getBoolean("isAdmin", false));
@@ -151,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         if(isAdmin){
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Logout")
@@ -165,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog,int which){
                             LoginActivity lga = new LoginActivity();
                             lga.Logout();
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.clear();
+                            editor.apply();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -217,6 +223,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog,int which){
                     LoginActivity lga = new LoginActivity();
                     lga.Logout();
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.clear();
+                    editor.apply();
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

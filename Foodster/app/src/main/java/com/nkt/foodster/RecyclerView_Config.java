@@ -164,6 +164,8 @@ public class RecyclerView_Config {
                     Intent intent = new Intent(mContext, RecipeActivity.class);
                     intent.putExtra("item_name", mTitle.getText().toString());
                     intent.putExtra("ingredients", mIngredients.getText().toString());
+                    intent.putExtra("instructions",mInstructions.getText());
+                    intent.putExtra("calories",mCalories.getText());
                     mContext.startActivity(intent);
                 }
 

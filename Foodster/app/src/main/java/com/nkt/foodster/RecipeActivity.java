@@ -9,7 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -17,17 +19,42 @@ public class RecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+String instructions;
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String item_name = extras.getString("item_name");
             String ingredients = extras.getString("ingredients");
+            instructions = extras.getString("instructions");
             TextView textView = (TextView) findViewById(R.id.txtDashboard);
             textView.setText(item_name);
 
 
             TextView ingredientsTextView = (TextView) findViewById(R.id.ingredientsTextView);
             ingredientsTextView.setText(ingredients);
+
+            Button button = (Button) findViewById(R.id.instructionButton);
+            button.setOnClickListener(v->{
+                if(instructions.length()>0){
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecipeActivity.this)
+                            .setTitle("Instructions")
+                            .setMessage(instructions)
+                            .setNegativeButton("Got it",new DialogInterface.OnClickListener(){
+                                public void onClick(DialogInterface dialog,int which){
+                                    //cancel
+
+                                }
+                            });
+
+
+                    alertDialog.show();
+                }
+                else{
+                    Toast.makeText(this, "No instructions available.\n Check again later!", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
 
             //The key argument here must match that used in the other activity
         }
@@ -52,6 +79,9 @@ public class RecipeActivity extends AppCompatActivity {
                 .setText(item_name+"\nIngredients:\n"+ingredients)
                 .startChooser();
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

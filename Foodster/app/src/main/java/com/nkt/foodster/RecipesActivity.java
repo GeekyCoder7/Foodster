@@ -61,9 +61,9 @@ public class RecipesActivity extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_recipes);
+
         FloatingActionButton fab = findViewById(R.id.fab1);
         fab.hide();
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +79,7 @@ public class RecipesActivity extends AppCompatActivity {
         System.out.println("Parent key is: "+sharedpreferences.getString("parentKey",""));
         if(sharedpreferences.getBoolean("is_really_admin", false)){
             fab.show();
+            System.out.println("I am an admin "+sharedpreferences.getBoolean("is_really_admin", false));
         }
 
        new FirebaseDatabaseHelper().readRecipes(cuisine_type,new FirebaseDatabaseHelper.DataStatus1() {

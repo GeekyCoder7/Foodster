@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView image;
     ProgressBar progressBar;
     static GoogleSignInClient mGoogleSignInClient;
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +139,11 @@ public class LoginActivity extends AppCompatActivity {
             btn_logout.setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("isAdmin",0);
+            SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isAdmin",false);
+            editor.putBoolean("is_really_admin",false);
+            editor.apply();
             startActivity(intent);
         }
         else{

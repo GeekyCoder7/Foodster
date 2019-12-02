@@ -7,9 +7,8 @@
 ### Admin & User
 - Notifications with FCM
 
-
 ### Admin
-- Admin panel to add item/recipe
+    Done :)
 
 ### User
 - Add recipe instruction with layout [Follow instructions]
@@ -17,8 +16,7 @@
 - Add favorite recipe
 
 ## Design:
-- Edit page for admin
-
+    Done :)
 
 # Changelog:
 ## v0.1-alpha
@@ -35,5 +33,6 @@
 - Share app
 - Share recipe
 - Firebase database added
-- Admin panel to remove/update 
-- Add categories/recipes in firebase
+- Admin panel to add/remove/update cuisines/recipes
+- Add cuisines/recipes in firebase
+- Edit page for admin
